@@ -17,7 +17,7 @@ import java.util.Date;
 @NoArgsConstructor
 @EqualsAndHashCode
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Fatura {
+public class Invoice {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;

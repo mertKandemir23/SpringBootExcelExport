@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @ToString
 @EqualsAndHashCode
 @Builder
-public class FaturaDto {
+public class InvoiceDto {
     Long id;
 
     String name;

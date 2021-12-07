@@ -1,6 +1,6 @@
 package com.kandemirmert.springbootexcel.exporter;
 
-import com.kandemirmert.springbootexcel.model.Fatura;
+import com.kandemirmert.springbootexcel.model.Invoice;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.usermodel.XSSFFont;
@@ -13,16 +13,16 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public class FaturaExcelExporter {
+public class InvoiceExcelExporter {
     private XSSFWorkbook workbook;
     private XSSFSheet sheet;
     private CreationHelper createHelper;
     private CellStyle dateCellStyle;
 
-    private List<Fatura> faturaList;
+    private List<Invoice> invoiceList;
 
-    public FaturaExcelExporter(List<Fatura> faturaList) {
-        this.faturaList = faturaList;
+    public InvoiceExcelExporter(List<Invoice> invoiceList) {
+        this.invoiceList = invoiceList;
         workbook = new XSSFWorkbook();
         this.createHelper = workbook.getCreationHelper();
         dateCellStyle = workbook.createCellStyle();
@@ -52,7 +52,7 @@ public class FaturaExcelExporter {
     }
 
     private void writeHeaderLine() {
-        sheet = workbook.createSheet("Fatura");
+        sheet = workbook.createSheet("Invoice");
         Row row2 = sheet.createRow(0);
         CellStyle cellStyle = workbook.createCellStyle();
         XSSFFont font = workbook.createFont();
@@ -61,15 +61,15 @@ public class FaturaExcelExporter {
         cellStyle.setFont(font);
         cellStyle.setAlignment(HorizontalAlignment.CENTER);
         Row row = sheet.createRow(1);
-        createACell(row2, 0, "Fatura Bilgisi", cellStyle);
+        createACell(row2, 0, "Invoice Info", cellStyle);
         sheet.addMergedRegion(new CellRangeAddress(0, 0, 0, 5));
         font.setFontHeight(12);
-        createACell(row, 0, "Fatura ID", cellStyle);
-        createACell(row, 1, "Fatura Name", cellStyle);
-        createACell(row, 2, "Fatura Location", cellStyle);
-        createACell(row, 3, "Fatura Amount", cellStyle);
-        createACell(row, 4, "Fatura UpdateAt", cellStyle);
-        createACell(row, 5, "Fatura CreateAt", cellStyle);
+        createACell(row, 0, "Invoice ID", cellStyle);
+        createACell(row, 1, "Invoice Name", cellStyle);
+        createACell(row, 2, "Invoice Location", cellStyle);
+        createACell(row, 3, "Invoice Amount", cellStyle);
+        createACell(row, 4, "Invoice Due Date", cellStyle);
+        createACell(row, 5, "Invoice CreateAt", cellStyle);
 
     }
 
@@ -81,16 +81,16 @@ public class FaturaExcelExporter {
         cellStyle.setFont(font);
         cellStyle.setAlignment(HorizontalAlignment.CENTER);
         dateCellStyle.setAlignment(HorizontalAlignment.CENTER);
-        for (Fatura fatura : faturaList) {
+        for (Invoice invoice : invoiceList) {
             Row row = sheet.createRow(rowCount++);
             int columnCount = 0;
-            createACell(row, columnCount++, fatura.getId(), cellStyle);
-            createACell(row, columnCount++, fatura.getName(), cellStyle);
-            createACell(row, columnCount++, fatura.getLocation(), cellStyle);
-            createACell(row, columnCount++, fatura.getAmount(), cellStyle);
-            createACell(row, columnCount++, fatura.getDueDate(), dateCellStyle);
+            createACell(row, columnCount++, invoice.getId(), cellStyle);
+            createACell(row, columnCount++, invoice.getName(), cellStyle);
+            createACell(row, columnCount++, invoice.getLocation(), cellStyle);
+            createACell(row, columnCount++, invoice.getAmount(), cellStyle);
+            createACell(row, columnCount++, invoice.getDueDate(), dateCellStyle);
 
-            createACell(row, columnCount++, fatura.getCreatedAt(), dateCellStyle);
+            createACell(row, columnCount++, invoice.getCreatedAt(), dateCellStyle);
 
         }
     }

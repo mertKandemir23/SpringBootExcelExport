@@ -1,6 +1,6 @@
 package com.kandemirmert.springbootexcel.exporter;
 
-import com.kandemirmert.springbootexcel.model.Fatura;
+import com.kandemirmert.springbootexcel.model.Invoice;
 import com.lowagie.text.Font;
 import com.lowagie.text.*;
 import com.lowagie.text.pdf.PdfPCell;
@@ -11,12 +11,11 @@ import lombok.AllArgsConstructor;
 import javax.servlet.http.HttpServletResponse;
 import java.awt.*;
 import java.io.IOException;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @AllArgsConstructor
-public class FaturaPdfExporter {
-    private List<Fatura> faturaList;
+public class InvoicePdfExporter {
+    private List<Invoice> invoiceList;
 
 
     private void writeTableHeader(PdfPTable pdfTable) {
@@ -56,14 +55,14 @@ public class FaturaPdfExporter {
     }
 
     private void writeTableData(PdfPTable table) {
-        for (Fatura fatura : faturaList) {
-            table.addCell(String.valueOf(fatura.getId()));
+        for (Invoice invoice : invoiceList) {
+            table.addCell(String.valueOf(invoice.getId()));
 
-            table.addCell(fatura.getName());
-            table.addCell(fatura.getLocation());
-            table.addCell(String.valueOf(fatura.getAmount()));
-            table.addCell(fatura.getCreatedAt());
-            table.addCell(fatura.getDueDate());
+            table.addCell(invoice.getName());
+            table.addCell(invoice.getLocation());
+            table.addCell(String.valueOf(invoice.getAmount()));
+            table.addCell(invoice.getCreatedAt());
+            table.addCell(invoice.getDueDate());
 
         }
     }
