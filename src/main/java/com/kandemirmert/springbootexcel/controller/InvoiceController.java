@@ -28,12 +28,12 @@ public class InvoiceController {
     public void exportToExcel(HttpServletResponse response) throws IOException {
         response.setContentType("application/octet-stream");
         String headerKey = "Content-Disposition";
-        String headerValue = "attachment; filename=Invoice_info.xlsx";
+        String headerValue = "attachment; filename=Invoice_info.xlsx"; //dosya adı belirttik.
 
-        response.setHeader(headerKey, headerValue);
+        response.setHeader(headerKey, headerValue); //Response headerın içine değerleri koyduk.
         List<Invoice> invoiceList = invoiceService.invoiceList();
-        InvoiceExcelExporter invoiceExcelExporter = new InvoiceExcelExporter(invoiceList);
-        invoiceExcelExporter.export(response);
+        InvoiceExcelExporter invoiceExcelExporter = new InvoiceExcelExporter(invoiceList); //exporter sınıfını initialize ettik
+        invoiceExcelExporter.export(response); //parametre olarak aldığımız cevabı işleyip döndürdük
 
     }
 
